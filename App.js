@@ -5,6 +5,9 @@ export default function App() {
   return (
     <View style={{flex:1,}}>
        <View style={{flex:0.20, alignItems:'center', justifyContent:'center'}}>        
+        
+        <Text>This is Sign Up Screen</Text>
+        
         <Image style={{width:90, height:90}}
         
         source={require('./assets/icon.png')}/>
