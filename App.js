@@ -46,6 +46,8 @@ export default function App() {
 
      <View style={{flex:0.10, alignItems:'center',justifyContent:'center'}}>
 
+
+
         <TouchableOpacity style={{width:100, height:40, backgroundColor:'green', alignItems:'center',justifyContent:'center'}}>
           <Text style={{fontSize:20, color:'white'}}>Sign Up</Text>
         </TouchableOpacity>
