@@ -5,7 +5,7 @@ export default function Top() {
   return (
        <View style={{flex:0.20, alignItems:'center', justifyContent:'center'}}>        
         
-        <Text>This is Sign Up Screen</Text>
+        <Text style={{color:'white', fontSize:30}}>This is Sign in Screen</Text>
         
         <Image style={{width:90, height:90}}
         
