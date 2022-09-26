@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
 
-export default function Dashboard() {
+export default function Dashboard({route, navigation}) {
+  
   return (
     <View style={{flex:1,}}>
+      {  console.log('We are testing props', route.params.id) }
        <View style={{flex:0.20, alignItems:'center', justifyContent:'center'}}>        
         
         <Text>This is Sign Up Screen</Text>
