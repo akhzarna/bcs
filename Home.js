@@ -28,6 +28,13 @@ export default function Home({navigation}) {
           navigation.navigate('Settings', { name: 'Akhzar' })
         }
         />
+
+        <Button
+          title="Go to Chatting Screen"
+          onPress={() =>
+          navigation.navigate('Chatting',{id:'bcs1920cs'})
+        }
+        />
      
     </View>
   );
