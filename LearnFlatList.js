@@ -12,10 +12,17 @@ export default function LearnFlatList() {
     {key:4, title:'Admissions'},
     {key:5, title:'Status'},
   ])
+
+  const [appliedfilters, setAppliedFilters] = useState([
+    {key:0, title:'Fee'},
+    {key:1, title:'Ranking'},
+    {key:2, title:'City'},
+  ])
   const [data, setData] = useState([
-    {key:0, name:'Comsats', city:'Lahore', ranking:'Top 10',fee:100000, rank:8},
-    {key:1, name:'PUCIT', city:'Lahore', ranking:'Top 50',fee:60000, rank:18},
-    {key:2, name:'UET', city:'Lahore', ranking:'Top 100',fee:45000, rank:88},
+    {key:0, name:'Comsats', city:'Lahore', ranking:'Top 10',fee:100000, rank:8, country:'Pakistan'},
+    {key:1, name:'PUCIT', city:'Lahore', ranking:'Top 50',fee:60000, rank:18, country:'Pakistan'},
+    {key:2, name:'UET', city:'Lahore', ranking:'Top 100',fee:45000, rank:88, country:'Pakistan'},
+    {key:3, name:'Kabul University', city:'Kabul', ranking:'Top 100',fee:45000, rank:88, country:'Afghanistan'},
   ])
 
   const [movies, setMovies] = useState([])
@@ -25,8 +32,9 @@ export default function LearnFlatList() {
     try {
      const response = await fetch('https://reactnative.dev/movies.json');
      const json = await response.json();
-     console.log('Movies Data is =',json.movies)
+    //  console.log('Movies Data is =',json.movies)
      setMovies(json.movies);
+     console.log('movies',movies)
    } catch (error) {
      console.error(error);
    } finally {
@@ -36,6 +44,7 @@ export default function LearnFlatList() {
 
  useEffect(() => {
   getMovies();
+
   // console.log('useEffect')
   // const interval = setInterval(() => {
   //   setNumber(prev=>prev+1)
@@ -55,13 +64,27 @@ return (
         source={require('./assets/icon.png')}/>
       </View>
 
-      <View style={{flex:0.70, backgroundColor:'grey'}}>
-        <FlatList
+      <View style={{flex:0.70, backgroundColor:'lightgrey'}}>
+        
+      <FlatList
             data={filters}
             horizontal={true}
             renderItem={
                 ({item}) => (
-                <TouchableOpacity style={{backgroundColor:'green', marginRight:10, marginTop:10, marginBottom:20, height:40}}>
+                <TouchableOpacity style={{backgroundColor:'black', marginRight:10, marginTop:10, marginBottom:20, height:40}}>
+                    <Text style={{fontSize:24, color:'white'}}>{item.title}</Text>     
+                </TouchableOpacity>
+                )
+                }
+            // keyExtractor={item=>item.key}
+        />
+        
+        <FlatList
+            data={appliedfilters}
+            horizontal={true}
+            renderItem={
+                ({item}) => (
+                <TouchableOpacity style={{backgroundColor:'black', marginRight:10, marginTop:10, marginBottom:20, height:40}}>
                     <Text style={{fontSize:24, color:'white'}}>{item.title}</Text>     
                 </TouchableOpacity>
                 )
@@ -74,11 +97,11 @@ return (
             renderItem={
                 ({item}) =>     
               // (item.id=="1")?
-              <TouchableOpacity style={{backgroundColor:'green', marginBottom:10, height:120}}>
+              <TouchableOpacity style={{backgroundColor:'black', marginBottom:10, height:120}}>
                   <Text style={{fontSize:24, color:'white'}}>Id:     {item.id}</Text>
                   <Text style={{fontSize:24, color:'white'}}>Movie Name:     {item.title}</Text>
                   <Text style={{fontSize:24, color:'white'}}>Release Year:     {item.releaseYear}</Text>
-                  {/* <Text style={{fontSize:24, color:'white'}}>City:    {item.city}</Text> */}
+                  {/* <Text style={{fontSize:24, color:'white'}}>Fee:    {item.city}</Text> */}
               </TouchableOpacity>
 
               // :
