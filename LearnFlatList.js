@@ -1,8 +1,109 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, FlatList, SectionList } from 'react-native';
 import { useEffect } from 'react';
 import { ScrollView } from 'react-native-web';
+
+const matchesarrayforsectionList = [
+  {
+  key:0,
+  title:'Pak vs Eng',
+  data:[{
+    title:'Pak Win',
+    key:0,
+    result:'Pak Win',
+    matchnumber:'4th T20',
+    date:'25'
+  },
+  {
+    title:'Pak Win',
+    key:1,
+    result:'Pak Win',
+    matchnumber:'5th T20',
+    date:'28'
+  }]
+  },
+  {
+    key:1,
+    title:'Ind vs Aus',
+    data:[{
+      title:'Ind Win',
+      key:0,
+      result:'Ind Win',
+      matchnumber:'5th T20',
+      date:'28'
+    }]
+  },
+  {
+    key:2,
+    title: 'Ind vs SA',
+    data:[{
+      title:'Ind Win',
+      key:0,
+      result:'Ind Win',
+      matchnumber:'5th T20',
+      date:'28'
+    }]
+  }
+];
+
+const matches = [
+  {
+    title:'Pak vs Eng',
+    key:0,
+    result:'Pak Win',
+    matchnumber:'5th T20',
+    date:'28'
+  },
+  {
+    title:'Pak vs Eng',
+    key:1,
+    result:'Pak Win',
+    matchnumber:'4th T20',
+    date:'25'
+  },
+  {
+    title:'Pak vs Eng',
+    key:2,
+    result:'Eng Win',
+    matchnumber:'3rd T20',
+    date:'23'
+  },
+  {
+    title:'India vs Australia',
+    key:3,
+    result:'India Win',
+    matchnumber:'3rd T20',
+    date:'25'
+  },
+  {
+    title:'India vs SA',
+    key:4,
+    result:'India Win',
+    matchnumber:'1st T20',
+    date:'28'
+  },
+]
+
+const DATA = [
+  {
+    title: "Pakistan",
+    data: ["Lahore", "Karachi", "ISB", "Rajanpur"]
+  },
+  {
+    title: "INDIA",
+    data: ["New Dehli"]
+  },
+  {
+    title: "Afghanistan",
+    data: ["Kabul", "Jalalabad",]
+  },
+  {
+    title: "Bangladesh",
+    data: ["Dhaka", "Mir Pur"]
+  }
+];
+
 export default function LearnFlatList() {
   const [filters, setFilters] = useState([
     {key:0, title:'Fee'},
@@ -45,6 +146,15 @@ export default function LearnFlatList() {
  useEffect(() => {
   getMovies();
 
+  for (var i = 0; i<matches.length; i++){
+    console.log('Matches',matches[i]);
+    // var obj = {
+    //   key:0,
+    //   title:matches[i].title,
+    //   data:[],
+    // }
+  }
+
   // console.log('useEffect')
   // const interval = setInterval(() => {
   //   setNumber(prev=>prev+1)
@@ -58,64 +168,24 @@ export default function LearnFlatList() {
 return (
 
       <View style={{flex:1,}}>
-       <View style={{flex:0.20, alignItems:'center', justifyContent:'center'}}>        
-        <Text style={{fontSize:24, fontWeight:'bold'}}>We are Learning API's and FlatList </Text>
-        <Image style={{width:90, height:90}}
-        source={require('./assets/icon.png')}/>
-      </View>
 
-      <View style={{flex:0.70, backgroundColor:'lightgrey'}}>
-        
-      <FlatList
-            data={filters}
-            horizontal={true}
-            renderItem={
-                ({item}) => (
-                <TouchableOpacity style={{backgroundColor:'black', marginRight:10, marginTop:10, marginBottom:20, height:40}}>
-                    <Text style={{fontSize:24, color:'white'}}>{item.title}</Text>     
-                </TouchableOpacity>
-                )
-                }
-            // keyExtractor={item=>item.key}
-        />
-        
-        <FlatList
-            data={appliedfilters}
-            horizontal={true}
-            renderItem={
-                ({item}) => (
-                <TouchableOpacity style={{backgroundColor:'black', marginRight:10, marginTop:10, marginBottom:20, height:40}}>
-                    <Text style={{fontSize:24, color:'white'}}>{item.title}</Text>     
-                </TouchableOpacity>
-                )
-                }
-            // keyExtractor={item=>item.key}
-        />
-
-        <FlatList
-            data={movies}
-            renderItem={
-                ({item}) =>     
-              // (item.id=="1")?
-              <TouchableOpacity style={{backgroundColor:'black', marginBottom:10, height:120}}>
-                  <Text style={{fontSize:24, color:'white'}}>Id:     {item.id}</Text>
-                  <Text style={{fontSize:24, color:'white'}}>Movie Name:     {item.title}</Text>
-                  <Text style={{fontSize:24, color:'white'}}>Release Year:     {item.releaseYear}</Text>
-                  {/* <Text style={{fontSize:24, color:'white'}}>Fee:    {item.city}</Text> */}
-              </TouchableOpacity>
-
-              // :
-
-              // <TouchableOpacity style={{backgroundColor:'red', marginBottom:10, height:120}}>
-              // <Text style={{fontSize:24, color:'white'}}>Name:     {item.name}</Text>
-              // <Text style={{fontSize:24, color:'white'}}>Ranking:     {item.ranking}</Text>
-              // <Text style={{fontSize:24, color:'white'}}>Fee:     {item.fee}</Text>
-              // <Text style={{fontSize:24, color:'white'}}>City:    {item.city}</Text>
-              // </TouchableOpacity>
-              
-                }
-            // keyExtractor={item=>item.key}
-        />
+      <View style={{flex:0.70, backgroundColor:'lightgrey'}}>    
+      <SectionList
+      sections={matchesarrayforsectionList}
+      // keyExtractor={(item, index) => item + index}
+      renderItem={({ item }) => 
+      <TouchableOpacity style={{backgroundColor:'black', marginBottom:10, height:120}}>
+      <Text style={{fontSize:24, color:'white'}}>Country:     {item.title}</Text>
+      {/* <Text style={{fontSize:24, color:'white'}}>Fee:    {item.city}</Text> */}
+    </TouchableOpacity>
+  }
+      renderSectionHeader={({ section: { title } }) => (
+        <TouchableOpacity style={{backgroundColor:'green', height:30}}>
+        <Text style={{color:'white', fontSize:20}}>{title}</Text>
+        </TouchableOpacity>
+      )}
+    />
+ 
 
      </View>
 
