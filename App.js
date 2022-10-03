@@ -8,6 +8,7 @@ import Dashboard from './Dashboard';
 import LearnFlatList from './LearnFlatList';
 import Settings from './Settings';
 import Chatting from './Chatting';
+import SettingsScreen from './SettingsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,8 @@ export default function App(props) {
         <Stack.Screen name="LearnFlatList" component={LearnFlatList} />
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="Chatting" component={Chatting} />
-      
+        <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

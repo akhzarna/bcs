@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Button } fr
 import Top from './Top';
 import Center from './Center';
 import Bottom from './Bottom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useFocusEffect } from 'react';
 
 export default function ProfileScreen({props,navigation}) {
 
@@ -18,6 +18,29 @@ export default function ProfileScreen({props,navigation}) {
   })
 
 
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     // Do something when the screen is focused
+  //     console.log('useFocusEffect')
+  //     return () => {
+  //       console.log('useFocusEffect Return')
+  //       // Do something when the screen is unfocused
+  //       // Useful for cleanup functions
+  //     };
+  //   }, [])
+  // );
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      console.log('Called When you are back')
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  useEffect(()=>{
+    console.log('I am back on profile screen')
+  },[])
 
 //   const [number, setNumber] = useState('Akhzar Nazir');
 

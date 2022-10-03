@@ -104,7 +104,12 @@ const DATA = [
   }
 ];
 
-export default function LearnFlatList() {
+export default function LearnFlatList({navigation}) {
+  
+
+  // console.log('Font Size saved in Globals is = ',global.setting.fs)
+  
+  
   const [filters, setFilters] = useState([
     {key:0, title:'Fee'},
     {key:1, title:'Ranking'},
@@ -128,6 +133,9 @@ export default function LearnFlatList() {
 
   const [movies, setMovies] = useState([])
   const [number, setNumber] = useState(0)
+  const [fonts, setFonts] = useState(24)
+  
+  // const [allSettings, setAllSettings] = useState(global.setting)
 
   const getMovies = async () => {
     try {
@@ -146,14 +154,14 @@ export default function LearnFlatList() {
  useEffect(() => {
   getMovies();
 
-  for (var i = 0; i<matches.length; i++){
-    console.log('Matches',matches[i]);
+  // mfor (var i = 0; i<matches.length; i++){
+    // console.log('Matches',matches[i]);
     // var obj = {
     //   key:0,
     //   title:matches[i].title,
     //   data:[],
-    // }
-  }
+    // } 
+  // }
 
   // console.log('useEffect')
   // const interval = setInterval(() => {
@@ -163,18 +171,43 @@ export default function LearnFlatList() {
   //   console.log('useEffect Return')
   //   clearInterval(interval)
   // }
+
+  return()=>{
+    console.log('I am going Back');
+  }
  },[]);
+
+ useEffect(() => {
+  const unsubscribe = navigation.addListener('focus', () => {
+    console.log('Called When you are back on LearnFlatList')
+    setFonts(global.setting.fs)
+  });
+  return unsubscribe;
+}, [navigation]);
 
 return (
 
       <View style={{flex:1,}}>
+      
+      {console.log('Return Learn Flat List')}
+      
+      <View style={{flex:0.70, backgroundColor:'green'}}>    
+      
+      <Text style={{
+        fontSize:fonts,
+        color:global.setting.fc,
+        backgroundColor:global.setting.bc
+      }}>        
+        Section List 
+        </Text>
 
-      <View style={{flex:0.70, backgroundColor:'lightgrey'}}>    
       <SectionList
       sections={matchesarrayforsectionList}
       // keyExtractor={(item, index) => item + index}
       renderItem={({ item }) => 
-      <TouchableOpacity style={{backgroundColor:'black', marginBottom:10, height:120}}>
+      <TouchableOpacity style={{backgroundColor:'black', marginBottom:10, height:120}}
+        onPress={()=> setNumber(number+1)}
+      >
       <Text style={{fontSize:24, color:'white'}}>Country:     {item.title}</Text>
       {/* <Text style={{fontSize:24, color:'white'}}>Fee:    {item.city}</Text> */}
     </TouchableOpacity>
@@ -190,8 +223,10 @@ return (
      </View>
 
      <View style={{flex:0.10, alignItems:'center',justifyContent:'center'}}>
-        <TouchableOpacity style={{width:150, height:40, backgroundColor:'green', alignItems:'center',justifyContent:'center'}}>
-          <Text style={{fontSize:20, color:'white'}}>Testing Button</Text>
+        <TouchableOpacity style={{width:150, height:40, backgroundColor:'green', alignItems:'center',justifyContent:'center'}}
+          onPress={()=>navigation.navigate('SettingsScreen')}
+        >
+          <Text style={{fontSize:20, color:'white'}}>Setting Button</Text>
         </TouchableOpacity>
      </View>
     </View>
