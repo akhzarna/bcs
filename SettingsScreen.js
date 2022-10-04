@@ -8,6 +8,8 @@ export default function SettingsScreen({navigation}) {
 
  useEffect(() => {
 
+  console.log("Hamza Qayyum is working on this project")
+
   // return(()=>{
   //   console.log('is this calling');
   // })
