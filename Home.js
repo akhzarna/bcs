@@ -9,6 +9,13 @@ import React, { Component, useEffect, useState } from 'react';
 
 export default function Home({navigation}) {
 
+  useEffect(()=>{
+    global.setting={
+      fs:50,
+      fc:'green',
+      bc:'white'
+    }
+  })
   return (
     <View style={{flex:1, backgroundColor:'black'}}>
       {console.log('Return')}

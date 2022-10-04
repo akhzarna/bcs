@@ -104,7 +104,7 @@ const DATA = [
   }
 ];
 
-export default function LearnFlatList({navigation}) {
+export default function LearnFlatList({navigation, route}) {
   
 
   // console.log('Font Size saved in Globals is = ',global.setting.fs)
@@ -152,7 +152,8 @@ export default function LearnFlatList({navigation}) {
  }
 
  useEffect(() => {
-  getMovies();
+  console.log('simple useEffect is =')
+  // getMovies();
 
   // mfor (var i = 0; i<matches.length; i++){
     // console.log('Matches',matches[i]);
@@ -172,15 +173,16 @@ export default function LearnFlatList({navigation}) {
   //   clearInterval(interval)
   // }
 
-  return()=>{
-    console.log('I am going Back');
-  }
+  // return()=>{
+  //   console.log('I am going Back');
+  // }
  },[]);
 
  useEffect(() => {
+  console.log('navigation useEffect is =')
   const unsubscribe = navigation.addListener('focus', () => {
-    console.log('Called When you are back on LearnFlatList')
-    setFonts(global.setting.fs)
+    // console.log('Called When you are back on LearnFlatList',route.params.ammar)
+    // setFonts(route.params.ammar)
   });
   return unsubscribe;
 }, [navigation]);
@@ -189,7 +191,7 @@ return (
 
       <View style={{flex:1,}}>
       
-      {console.log('Return Learn Flat List')}
+      {/* {console.log('Return Learn Flat List')} */}
       
       <View style={{flex:0.70, backgroundColor:'green'}}>    
       

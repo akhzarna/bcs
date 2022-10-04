@@ -7,10 +7,16 @@ import { ScrollView } from 'react-native-web';
 export default function SettingsScreen({navigation}) {
 
  useEffect(() => {
-  return(()=>{
-    console.log('is this calling');
-  })
- },[]);
+
+  // return(()=>{
+  //   console.log('is this calling');
+  // })
+
+  return()=>{
+    console.log('I am going Back from Setting Screen');
+  }
+ 
+},[]);
 
  const saveSettings=()=>{
     
@@ -19,9 +25,8 @@ export default function SettingsScreen({navigation}) {
       fc:'green',
       bc:'white'
     }
-    console.log('pressed')
-
-    navigation.pop()
+    // console.log('pressed')
+    navigation.navigate('LearnFlatList')
  }
 
 return (

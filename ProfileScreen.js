@@ -32,14 +32,14 @@ export default function ProfileScreen({props,navigation}) {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      console.log('Called When you are back')
+      // console.log('Called When you are back')
     });
 
     return unsubscribe;
   }, [navigation]);
 
   useEffect(()=>{
-    console.log('I am back on profile screen')
+    // console.log('I am back on profile screen')
   },[])
 
 //   const [number, setNumber] = useState('Akhzar Nazir');
@@ -74,7 +74,7 @@ export default function ProfileScreen({props,navigation}) {
 
   return (
     <View style={{flex:1, backgroundColor:'black'}}>
-      {console.log('Return')}
+      {/* {console.log('Return')} */}
       <Text style={{color:'white', fontSize:30, marginTop:30}}> We are Learning State {text} </Text>
       <TextInput 
         style={{backgroundColor:'lightgrey', width:120, height:40, alignSelf:'center', marginBottom:10}}
