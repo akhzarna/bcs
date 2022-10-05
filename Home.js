@@ -17,7 +17,7 @@ export default function Home({navigation}) {
     }
   })
   return (
-    <View style={{flex:1, backgroundColor:'black'}}>
+    <View style={{flex:1, backgroundColor:'white'}}>
       {console.log('Return')}
 
       <Button
@@ -41,6 +41,13 @@ export default function Home({navigation}) {
           onPress={() =>
           navigation.navigate('Chatting',{id:'bcs1920cs'})
         }
+        />
+
+      <Button
+          title="Go to Next"
+          onPress={() =>
+            navigation.navigate('HomeForClass')
+          }
         />
      
     </View>

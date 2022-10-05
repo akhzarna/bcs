@@ -104,11 +104,7 @@ const DATA = [
   }
 ];
 
-export default function LearnFlatList({navigation, route}) {
-  
-
-  // console.log('Font Size saved in Globals is = ',global.setting.fs)
-  
+export default function LearnFlatList({navigation, route}) {  
   
   const [filters, setFilters] = useState([
     {key:0, title:'Fee'},
@@ -154,28 +150,20 @@ export default function LearnFlatList({navigation, route}) {
  useEffect(() => {
   console.log('simple useEffect is =')
   // getMovies();
+  return()=>{
+    console.log('useEffect Return')
+  }
+ });
 
-  // mfor (var i = 0; i<matches.length; i++){
-    // console.log('Matches',matches[i]);
-    // var obj = {
-    //   key:0,
-    //   title:matches[i].title,
-    //   data:[],
-    // } 
-  // }
+ useEffect(() => {
+  console.log('simple useEffect number is =')
+  // getMovies();
+ },[number]);
 
-  // console.log('useEffect')
-  // const interval = setInterval(() => {
-  //   setNumber(prev=>prev+1)
-  // }, 1000);
-  // return()=>{
-  //   console.log('useEffect Return')
-  //   clearInterval(interval)
-  // }
-
-  // return()=>{
-  //   console.log('I am going Back');
-  // }
+ useEffect(() => {
+  console.log('simple useEffect [] =')
+  // getMovies();
+  
  },[]);
 
  useEffect(() => {
@@ -191,7 +179,7 @@ return (
 
       <View style={{flex:1,}}>
       
-      {/* {console.log('Return Learn Flat List')} */}
+      {console.log('Return Learn Flat List')}
       
       <View style={{flex:0.70, backgroundColor:'green'}}>    
       
@@ -226,7 +214,11 @@ return (
 
      <View style={{flex:0.10, alignItems:'center',justifyContent:'center'}}>
         <TouchableOpacity style={{width:150, height:40, backgroundColor:'green', alignItems:'center',justifyContent:'center'}}
-          onPress={()=>navigation.navigate('SettingsScreen')}
+          onPress={()=>{
+            setNumber(number+10)
+            // navigation.navigate('SettingsScreen')
+          }
+        }
         >
           <Text style={{fontSize:20, color:'white'}}>Setting Button</Text>
         </TouchableOpacity>
