@@ -39,12 +39,12 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA3__9va2vzu-4x_9qWHDn4ntnXGoTkn50",
-  authDomain: "fir-expo-fa5da.firebaseapp.com",
-  projectId: "fir-expo-fa5da",
-  storageBucket: "fir-expo-fa5da.appspot.com",
-  messagingSenderId: "687421685940",
-  appId: "1:687421685940:web:e3679f8a95c51c78f857e1"
+  apiKey: "AIzaSyCK2gse2S4gzT4tqStLYR-ub81aLiV07Ig",
+  authDomain: "bcs20-ce9d9.firebaseapp.com",
+  projectId: "bcs20-ce9d9",
+  storageBucket: "bcs20-ce9d9.appspot.com",
+  messagingSenderId: "700617627214",
+  appId: "1:700617627214:web:a9c1fc4aeacbd5d178151f"
 };
 
 let app;
@@ -58,38 +58,78 @@ if (firebase.apps.length === 0) {
 const db = app.firestore();
 const auth = firebase.auth();
 
-const createUser = () => {
-  auth.createUserWithEmailAndPassword('akhzarn1@yahoo.com','123456')
-  .then( data =>{
-    // QUERY Firestore Ko Data Send Kar dain gai
-    console.log('firebase return is = ',data)
-  })
-}
-
-const loginUser = () => {
-  auth.signInWithEmailAndPassword('umer@yahoo.com','123456')
-  .then( data =>{
-    // QUERY Firestore Ko Data Send Kar dain gai
-    console.log('firebase return is = ',data)
-  })
-}
-
 export default function Home({navigation}) {
 
+  const createUser = () => {
+    auth.createUserWithEmailAndPassword('akhzarn@yahoo.com','123456')
+    .then( data =>{
+      // QUERY Firestore Ko Data Send Kar dain gai
+      console.log('firebase return is = ',data)
+    }).catch(error=>{
+      console.log('Catch Error',error)
+    })
+  }
+  
+  const loginUser = () => {
+    auth.signInWithEmailAndPassword('akhzarn@yahoo.com','123456')
+    .then( data =>{
+      // QUERY Firestore Ko Data Send Kar dain gai
+      console.log('firebase return is = ',data)
+    }).catch(error=>{
+      console.log('Catch Error',error)
+    })
+  }
+  
+  const guestUser = () => {
+    auth.signInAnonymously()
+    .then( data =>{
+      // QUERY Firestore Ko Data Send Kar dain gai
+      console.log('firebase return is = ',data)
+    }).catch(error=>{
+      console.log('Catch Error',error)
+    })
+  }
+  
+  const logoutUser = () => {
+    auth.onAuthStateChanged(user=>{
+      if(user){
+        console.log('Logged in user is =', user)
+        auth.signOut()
+      }else{
+        console.log('No One is =', user)
+      }
+    })
+  }
+
   useEffect(()=>{
-    // global.setting={
-    //   fs:50,
-    //   fc:'green',
-    //   bc:'white'
-    // }
-
-
     global.setting={
       fs:50,
       fc:'green',
       bc:'white'
     }
-  })
+
+
+      // const subscriber = db
+      //   .collection('student')
+      //   .doc('mRlPpQtQzjEYB7jCulei')
+      //   .onSnapshot(documentSnapshot => {
+      //     console.log('User data: ', documentSnapshot.data());
+      //   });
+      // // Stop listening for updates when no longer required
+      // return () => subscriber();
+        
+  const subscriber = db
+  .collection('student')
+  .get()
+  .then(querySnapshot => {
+    console.log('Total users: ', querySnapshot.size);
+    querySnapshot.forEach(documentSnapshot => {
+      console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+    });
+  });
+  return () => subscriber();
+
+  }, [])
 
   const [fonts, setFonts] = useState(16)
 
@@ -147,7 +187,7 @@ export default function Home({navigation}) {
         />
 
       <Button
-          title="Firebase"
+          title="Create USer"
           onPress={createUser}
         />
      
@@ -156,6 +196,16 @@ export default function Home({navigation}) {
           onPress={loginUser}
         />
      
+     <Button
+          title="Guest User"
+          onPress={guestUser}
+        />
+
+    <Button
+          title="Log Out User"
+          onPress={logoutUser}
+        />
+
     </View>
   );
 }
