@@ -9,28 +9,34 @@ import React, { Component, useEffect, useState } from 'react';
 var flag = 12;
 
 export default class HomeForClass extends Component {
-
+  // state={
+  //   count: 0,
+  //   number: 0
+  // }
   constructor(props){
     super(props)
-
-    console.log('Constructor')
     
+    console.log('Constructor')
     this.state={
-      count: 0
+      count: 0,
+      number: 0
     }
   }
 
-  static getDerivedStateFromProps(){
-    console.log('getDerivedStateFromProps')
+  static getDerivedStateFromProps(props,state){
+      console.log('getDerivedStateFromProps')
+    // console.log('getDerivedStateFromProps Props',props)
+    // console.log('getDerivedStateFromProps State',state)
   }
   
   render(){
-    console.log('Home for Class Return Return')
+    console.log('Home for Class Render')
 
   return (
     <View style={{flex:1, backgroundColor:'white'}}>
       
-           
+    {console.log('Home for Class Return')}
+
       <Button
           title="Go to Setting Class"
           onPress={() =>
@@ -66,13 +72,13 @@ export default class HomeForClass extends Component {
     return null;
   }
 
+  shouldComponentUpdate(){
+    return false
+  }
+
   componentDidUpdate(){
     console.log('componentDidUpdate')
    }
-
-    shouldComponentUpdate(){
-    return true
-  }
 
   componentWillUnmount(){
     console.log('componentWillUnmount')

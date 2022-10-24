@@ -7,47 +7,153 @@ import Center from './Center';
 import Bottom from './Bottom';
 import React, { Component, useEffect, useState } from 'react';
 
+
+//   // Import the functions you need from the SDKs you need
+//   import firebase, { initializeApp } from "firebase/app";
+//   // import * as firebase from "firebase";
+
+//   // import firebase from 'firebase/app';
+//   import 'firebase/auth';
+//   import 'firebase/firestore';
+
+//   // import * as firebase from "firebase";
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
+
+// // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: "AIzaSyA3__9va2vzu-4x_9qWHDn4ntnXGoTkn50",
+//   authDomain: "fir-expo-fa5da.firebaseapp.com",
+//   projectId: "fir-expo-fa5da",
+//   storageBucket: "fir-expo-fa5da.appspot.com",
+//   messagingSenderId: "687421685940",
+//   appId: "1:687421685940:web:e3679f8a95c51c78f857e1"
+// };
+
+// // Initialize Firebase
+// initializeApp(firebaseConfig);
+
+
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA3__9va2vzu-4x_9qWHDn4ntnXGoTkn50",
+  authDomain: "fir-expo-fa5da.firebaseapp.com",
+  projectId: "fir-expo-fa5da",
+  storageBucket: "fir-expo-fa5da.appspot.com",
+  messagingSenderId: "687421685940",
+  appId: "1:687421685940:web:e3679f8a95c51c78f857e1"
+};
+
+let app;
+
+if (firebase.apps.length === 0) {
+  app = firebase.initializeApp(firebaseConfig)
+} else {
+  app = firebase.app();
+}
+
+const db = app.firestore();
+const auth = firebase.auth();
+
+const createUser = () => {
+  auth.createUserWithEmailAndPassword('akhzarn1@yahoo.com','123456')
+  .then( data =>{
+    // QUERY Firestore Ko Data Send Kar dain gai
+    console.log('firebase return is = ',data)
+  })
+}
+
+const loginUser = () => {
+  auth.signInWithEmailAndPassword('umer@yahoo.com','123456')
+  .then( data =>{
+    // QUERY Firestore Ko Data Send Kar dain gai
+    console.log('firebase return is = ',data)
+  })
+}
+
 export default function Home({navigation}) {
 
   useEffect(()=>{
+    // global.setting={
+    //   fs:50,
+    //   fc:'green',
+    //   bc:'white'
+    // }
+
+
     global.setting={
       fs:50,
       fc:'green',
       bc:'white'
     }
   })
+
+  const [fonts, setFonts] = useState(16)
+
+  useEffect(() => {
+    // console.log('navigation useEffect is =')
+    const unsubscribe = navigation.addListener('focus', () => {
+      setFonts(global.setting.fs)
+      
+      console.log('navigation useEffect is Called=', global.setting)
+
+    });
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <View style={{flex:1, backgroundColor:'white'}}>
+      
       {console.log('Return')}
 
-      <Button
+      <Text style={{fontSize:fonts}}> We are testing </Text>
+
+      {/* <Button
           title="Go to Next Screen"
           onPress={() =>
           navigation.navigate('ProfileScreen',{id:'hef34231'})
         }
-        />
-
-      {/* <Button title='Minus' onPress={()=>setState({count:1})} /> */}
+        /> */}
       
-      <Button
+      {/* <Button
           title="Go to Setting Screen"
           onPress={() =>
           navigation.navigate('Settings', { name: 'Akhzar' })
         }
-        />
+        /> */}
 
-        <Button
+        {/* <Button
           title="Go to Chatting Screen"
           onPress={() =>
           navigation.navigate('Chatting',{id:'bcs1920cs'})
         }
+        /> */}
+
+      <Button
+          title="Go to Next Functional Component"
+          onPress={() =>
+            navigation.navigate('HomeForFunctional')
+          }
         />
 
       <Button
-          title="Go to Next"
+          title="Go to Next Class Component"
           onPress={() =>
             navigation.navigate('HomeForClass')
           }
+        />
+
+      <Button
+          title="Firebase"
+          onPress={createUser}
+        />
+     
+     <Button
+          title="Firebase Sign In"
+          onPress={loginUser}
         />
      
     </View>

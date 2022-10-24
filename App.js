@@ -10,6 +10,7 @@ import Settings from './Settings';
 import Chatting from './Chatting';
 import SettingsScreen from './SettingsScreen';
 import HomeForClass from './HomeForClass';
+import HomeForFunctional from './HomeForFunctional';
 import SettingForClass from './SettingForClass';
 
 const Stack = createNativeStackNavigator();
@@ -27,6 +28,7 @@ export default function App(props) {
         <Stack.Screen name="Chatting" component={Chatting} />
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         <Stack.Screen name="HomeForClass" component={HomeForClass} />
+        <Stack.Screen name="HomeForFunctional" component={HomeForFunctional} />
         <Stack.Screen name="SettingForClass" component={SettingForClass} />
 
       </Stack.Navigator>
