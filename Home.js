@@ -188,22 +188,22 @@ export default function Home({navigation}) {
 
       <Button
           title="Create USer"
-          onPress={createUser}
+          onPress={()=>createUser}
         />
      
      <Button
           title="Firebase Sign In"
-          onPress={loginUser}
+          onPress={()=>loginUser}
         />
      
      <Button
           title="Guest User"
-          onPress={guestUser}
+          onPress={()=>guestUser}
         />
 
     <Button
           title="Log Out User"
-          onPress={logoutUser}
+          onPress={()=>logoutUser}
         />
 
     </View>
