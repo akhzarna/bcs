@@ -39,12 +39,12 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCK2gse2S4gzT4tqStLYR-ub81aLiV07Ig",
-  authDomain: "bcs20-ce9d9.firebaseapp.com",
-  projectId: "bcs20-ce9d9",
-  storageBucket: "bcs20-ce9d9.appspot.com",
-  messagingSenderId: "700617627214",
-  appId: "1:700617627214:web:a9c1fc4aeacbd5d178151f"
+  apiKey: "AIzaSyDhlmHLvYayhhMna9rLh3pM4f8f--jfeA4",
+  authDomain: "bseb-f0d27.firebaseapp.com",
+  projectId: "bseb-f0d27",
+  storageBucket: "bseb-f0d27.appspot.com",
+  messagingSenderId: "142210169144",
+  appId: "1:142210169144:web:d11233da3e21fbe6c729cd"
 };
 
 let app;
@@ -102,6 +102,7 @@ export default function Home({navigation}) {
   }
 
   useEffect(()=>{
+
     global.setting={
       fs:50,
       fc:'green',
@@ -109,17 +110,18 @@ export default function Home({navigation}) {
     }
 
 
-      // const subscriber = db
-      //   .collection('student')
-      //   .doc('mRlPpQtQzjEYB7jCulei')
+      // db.collection('student')
+      //   .doc('R3v1dlrtVX8GBBsho4eS')
       //   .onSnapshot(documentSnapshot => {
       //     console.log('User data: ', documentSnapshot.data());
       //   });
-      // // Stop listening for updates when no longer required
+      // Stop listening for updates when no longer required
       // return () => subscriber();
         
-  const subscriber = db
-  .collection('student')
+  // const subscriber = db
+
+
+  db.collection('student')
   .get()
   .then(querySnapshot => {
     console.log('Total users: ', querySnapshot.size);
@@ -127,7 +129,7 @@ export default function Home({navigation}) {
       console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
     });
   });
-  return () => subscriber();
+  // return () => subscriber();
 
   }, [])
 
