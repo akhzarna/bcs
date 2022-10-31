@@ -37,6 +37,7 @@ import React, { Component, useEffect, useState } from 'react';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import 'firebase/compat/database';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDhlmHLvYayhhMna9rLh3pM4f8f--jfeA4",
@@ -57,9 +58,14 @@ if (firebase.apps.length === 0) {
 
 const db = app.firestore();
 const auth = firebase.auth();
+const dbreal = app.database('https://bseb-f0d27-default-rtdb.asia-southeast1.firebasedatabase.app');
+
+// const dbreal = app.database('https://bseb-f0d27-default-rtdb.asia-southeast1.firebasedatabase.app');
+// Please change your database URL to https://bseb-f0d27-default-rtdb.asia-southeast1.firebasedatabase.app (https://bseb-f0d27-default-rtdb.firebaseio.com/)
 
 export default function Home({navigation}) {
 
+  const [data, setData] = useState();
   const createUser = () => {
     auth.createUserWithEmailAndPassword('akhzarn@yahoo.com','123456')
     .then( data =>{
@@ -120,16 +126,88 @@ export default function Home({navigation}) {
         
   // const subscriber = db
 
+  // .where('campus','in',['Comsats','UET','PUCIT','Superior'])
+  // .where('rollno','>=',2)
+  // .orderBy('age', 'desc')
+  // 
+
+  // .orderBy('age', 'desc')
+  // .startAt(18)
+  // .endAt(30)
+
+  // db.collection('student')
+  // .orderBy('rollno', 'asc')
+  // .get()
+  // .then(querySnapshot => {
+  //   console.log('Firestore Total users: ', querySnapshot.size);
+  //   querySnapshot.forEach(documentSnapshot => {
+  //     console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+  //   });
+  // });
+
+  // db.collection('student')
+  // .doc('1234')
+  // .update({
+  //   rollno: 340,
+  // })
+  // .then(() => {
+  //   console.log('User updated!');
+  // });
+
 
   db.collection('student')
-  .get()
-  .then(querySnapshot => {
-    console.log('Total users: ', querySnapshot.size);
-    querySnapshot.forEach(documentSnapshot => {
-      console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
-    });
+  .doc('umer')
+  .add({
+    campus: 'Pak Aims',
+    rollno: 1,
+    name:'Salman',
+    class:'BSE B',
+    key:10
+  })
+  .then(() => {
+    console.log('User added!');
   });
+
+
+  // firestore()
+  // .collection('Users')
+  // .doc('ABC')
+  // .set({
+  //   name: 'Ada Lovelace',
+  //   age: 30,
+  // })
+  // .then(() => {
+  //   console.log('User added!');
+  // });
+
+
+  // firestore()
+  // .collection('Users')
+  // .doc('ABC')
+  // .update({
+  //   age: 31,
+  // })
+  // .then(() => {
+  //   console.log('User updated!');
+  // });
+
+
   // return () => subscriber();
+  
+  console.log('useEffect')
+
+  // limitToLast
+  // limitToFirst
+  // .ref('/universities').limitToFirst(2)
+  // .ref('/universities').limitToLast(2)
+  // .ref('/universities').orderByChild("name").equalTo("COMSATS")
+
+  // dbreal
+  // .ref('/universities').orderByChild("name").equalTo("COMSATS")
+  // .on('value', snapshot => {
+  //   console.log('Real Time User data: ', snapshot.val());
+  //   setData(snapshot.val())
+  // });
 
   }, [])
 
@@ -149,7 +227,9 @@ export default function Home({navigation}) {
   return (
     <View style={{flex:1, backgroundColor:'white'}}>
       
-      {console.log('Return')}
+      {
+        // console.log('User data: ', data)
+      }
 
       <Text style={{fontSize:fonts}}> We are testing </Text>
 
